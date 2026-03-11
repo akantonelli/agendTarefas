@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
+
+    //Metodo através de scripts para banco de dadps (função JPA Repository)
+    boolean existsByEmail(String email);
+
 }
