@@ -24,10 +24,12 @@ public class UsuarioService {
 
     }
 
+    //Inicia verificação de email existente no banco de dados
     public boolean verificaEmailExistente(String email){
         return usuarioRepository.existsByEmail(email);
     }
 
+    //Inicia Validação do email existente
     public void emailExiste (String email){
         try {
             boolean existe = verificaEmailExistente(email);
