@@ -1,15 +1,13 @@
 package com.akantonelli.agendTarefas.business.dto;
 
 import jakarta.persistence.Column;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class EnderecoDTO {
 
     private String rua;
