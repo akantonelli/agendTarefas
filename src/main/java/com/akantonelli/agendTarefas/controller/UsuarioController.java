@@ -1,6 +1,7 @@
 package com.akantonelli.agendTarefas.controller;
 
 import com.akantonelli.agendTarefas.business.UsuarioService;
+import com.akantonelli.agendTarefas.business.dto.UsuarioDTO;
 import com.akantonelli.agendTarefas.infrastructure.entities.Usuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,8 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<Usuario> salvaUsuario (@RequestBody Usuario usuario){
-        return ResponseEntity.ok(usuarioService.salvaUsuario(usuario));
+    public ResponseEntity<UsuarioDTO> salvaUsuario (@RequestBody UsuarioDTO usuarioDTO){
+        return ResponseEntity.ok(usuarioService.salvaUsuario(usuarioDTO));
 
     }
 
