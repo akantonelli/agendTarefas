@@ -1,5 +1,7 @@
 package com.akantonelli.agendTarefas.business;
 
+import com.akantonelli.agendTarefas.business.converter.UsuarioConverter;
+import com.akantonelli.agendTarefas.business.dto.UsuarioDTO;
 import com.akantonelli.agendTarefas.infrastructure.entities.Usuario;
 import com.akantonelli.agendTarefas.infrastructure.exceptions.ConflictException;
 import com.akantonelli.agendTarefas.infrastructure.repository.UsuarioRepository;
@@ -11,11 +13,15 @@ import org.springframework.stereotype.Service;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository; //classe imutável (sem modificação)
+    private final UsuarioConverter usuarioConverter;
 
-    public Usuario salvaUsuario (Usuario usuario){
+    public UsuarioDTO salvaUsuario (UsuarioDTO usuarioDTO){
+        Usuario usuario = usuarioConverter.paraUsuario(usuarioDTO);
+
         try {
             emailExiste(usuario.getEmail());
-            return usuarioRepository.save(usuario);
+            usuario = usuarioRepository.save(usuario);
+            return usuarioConverter.paraUsuarioDTO(usuario);
 
         }catch (ConflictException e){
             throw new ConflictException("Email já cadastrado." , e.getCause());
