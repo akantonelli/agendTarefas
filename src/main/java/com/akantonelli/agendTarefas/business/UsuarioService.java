@@ -4,6 +4,7 @@ import com.akantonelli.agendTarefas.business.converter.UsuarioConverter;
 import com.akantonelli.agendTarefas.business.dto.UsuarioDTO;
 import com.akantonelli.agendTarefas.infrastructure.entities.Usuario;
 import com.akantonelli.agendTarefas.infrastructure.exceptions.ConflictException;
+import com.akantonelli.agendTarefas.infrastructure.exceptions.ResourceNotFoundException;
 import com.akantonelli.agendTarefas.infrastructure.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -47,6 +48,14 @@ public class UsuarioService {
         } catch (ConflictException e) {
             throw new RuntimeException("E-mail já cadastrado!", e.getCause());
         }
+    }
+
+    public UsuarioDTO buscarUsuarioPorEmail(String email){
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Email não encontrado: " + email));
+
+        return usuarioConverter.paraUsuarioDTO(usuario);
+
     }
 
     public void deletaUsuarioPorEmail (String email){

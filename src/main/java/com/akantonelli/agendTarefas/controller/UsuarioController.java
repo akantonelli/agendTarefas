@@ -20,8 +20,11 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.salvaUsuario(usuarioDTO));
 
     }
+    @GetMapping
+    public ResponseEntity<UsuarioDTO> buscaUsuarioPorEmail (@RequestParam("email") String email){
+        return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));
 
-
+    }
 
     @DeleteMapping("/{email}")
     public ResponseEntity<Void> deletaUsuarioPorEmail (@PathVariable String email){
