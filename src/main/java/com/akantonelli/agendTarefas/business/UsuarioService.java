@@ -30,7 +30,6 @@ public class UsuarioService {
             throw new ConflictException("Email já cadastrado." , e.getCause());
         }
 
-
     }
 
     //Inicia verificação de email existente no banco de dados
@@ -49,5 +48,10 @@ public class UsuarioService {
             throw new RuntimeException("E-mail já cadastrado!", e.getCause());
         }
     }
+
+    public void deletaUsuarioPorEmail (String email){
+        usuarioRepository.deleteByEmail(email);
+    }
+
 
 }
