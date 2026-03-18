@@ -5,10 +5,7 @@ import com.akantonelli.agendTarefas.business.dto.UsuarioDTO;
 import com.akantonelli.agendTarefas.infrastructure.entities.Usuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 // Recepciona os dados e realiza o processamento da API ("porta de entrada dos dados")
 @RestController
@@ -23,5 +20,15 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.salvaUsuario(usuarioDTO));
 
     }
+
+
+
+    @DeleteMapping("/{email}")
+    public ResponseEntity<Void> deletaUsuarioPorEmail (@PathVariable String email){
+        usuarioService.deletaUsuarioPorEmail(email);
+        return ResponseEntity.ok().build();
+    }
+
+
 
 }
